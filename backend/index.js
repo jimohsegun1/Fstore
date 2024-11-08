@@ -44,4 +44,8 @@ if (process.env.NODE_ENV === "production") {
 	});
 }
 
+app.get("/api/health", (req, res) => {
+	res.json({ message: "API is working!" });
+  });
+
 app.listen(port, () => console.log(`Server running on port: ${port}`));
