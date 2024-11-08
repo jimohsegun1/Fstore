@@ -1,5 +1,5 @@
 // packages
-const cors = require("cors");
+import cors from "cors"; // Using import statement for CORS
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
@@ -20,7 +20,15 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// Define CORS options
+const corsOptions = {
+  origin: process.env.CLIENT_URL || "http://localhost:5173", // Frontend URL (replace with your production URL)
+  credentials: true, // Enable cookies and credentials to be sent with requests
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+};
+
+// Use CORS with the defined options
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
